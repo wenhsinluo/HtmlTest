@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/c604764fdd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="normalize.css">
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            width: 1200px;
+            margin: auto;
+        }
+        .wrap {
+            width: 1200px;
+            display: flex;
+            flex-direction: column;
+        }
+        .topnav {
+            position: relative;
+            display: flex;
+            width: 100%;
+            font-size: 14px;
+            justify-content: center;
+            align-items: center;
+            height: 76px;
+            border-bottom: 1px solid #eee;
+            margin: auto;
+        }
+        .topnavA {
+            color: #000;
+            text-decoration: none;
+            align-items: center;
+            position: absolute;
+        }
+        .topnavA:hover {
+            transition: .4s;
+            color: #ffe605;
+        }
+        #special:hover{
+            color: black;
+        }
+        .topnav2{
+            width: 100%;
+            /* border-bottom: 1px solid #000; */
+            background-color: #fff;
+            height: 196px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 0px;
+            margin: auto;
+            z-index: 9;
+        }
+        .topnav2A{
+            font-size: 16px;
+            position: absolute;
+            text-decoration: none;
+            color: #000;
+        }
+        .item{
+            flex-wrap: wrap;
+            display: flex;
+            width: 1200px;
+        }
+        .item .lPic{
+            width: 70%;
+        }
+        .item .rText{
+            width: 30%;
+        }
+        .item .lPic img{
+            width: 87%;
+        }
+        .item .rText p{
+            font-size: 80px;
+            margin-left: -75px;
+            /* width: 30%; */
+        }
+        .ReadMore{
+            margin-left: -75px;
+            height: 60px;
+            width: 195px;
+            background-color: #000;
+            border-radius: 7px;
+            text-align: center;
+            line-height: 58px;
+            font-size: 21px;
+        }
+        .ReadMoreA{
+            color: #fff;
+            text-decoration: none;
+        }
+        .ReadMore:hover{
+            transition: .4s;
+            background-color: #ffe605;
+        }
+        .ReadMore:hover .ReadMoreA{
+            transition: .4s;
+            color: #000;
+        }
+        .picNav {
+            display:flex;
+        }
+        .picNav a{
+            width: 100%;
+            text-decoration: none;
+            font-size: 25px;
+            color: #000;
+            margin-top: 100px;
+            position: relative;
+            text-align: center;
+        }
+        .picNav img{
+            width: 100%;
+        }
+        .picNav p{
+            width: 100%;
+            position: absolute;
+            bottom: 40px;
+        }
+        .picNav a:hover{
+            transition: .4s;
+            color: #ffe605;
+        }
+        .threePic{
+            width: 100%;
+            display: flex;
+        }
+        .test{
+            position: absolute;
+            z-index: 1;
+        }
+        .threePic h1{
+            font-size: 40px;
+            color: #fff;
+        }
+        .picOen a{
+            font-size: 20px;
+            top: 655px;
+            left: 62px;
+            color: #fff;
+        }.picTwo a{
+            font-size: 20px;
+            color: #fff;
+        }
+        .picTwo p{
+            font-size: 15px;
+            color: #fff;
+            top: 180px;
+            left: 40px;
+        }
+        .threePic img{
+            margin: 13px;
+        }
+        .threePic a:hover{
+            transition: .4s;
+            color: #000;
+        }
+        .canNav{
+            margin-top: 70px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .can{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .can img{
+            margin: 20px;
+            background-color: #f1f1f1;
+        }
+        .canNav a:hover{
+            transition: .4s;
+            background-color: #ffe605;
+            color:#fff;
+        }
+        #fzSet a{
+            text-decoration: none;
+            color: #000;
+        }
+        #fzSet{
+            text-align:center;
+            font-size: 18px;
+            color: #000;
+        }
+        #a{
+            background-color: #fff;
+            border: 1px solid #000;
+            border-radius:3px;
+            display: inline-block;
+            width: 150px;
+            height: 40px;
+            font-size: 15px;
+            line-height: 43px;
+        }
+        #b{
+            background-color: #fff;
+            border: 1px solid #000;
+            border-radius:3px;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 43px;
+            font-size: 15px;
+        }
+        #a:hover{
+            background-color: #ffe605;
+            transition: .4s;
+        }
+        #b:hover{
+            background-color: #ffe605;
+            transition: .4s;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="topnav">
+        <a href="" class="topnavA" style="left: 0px;"> <i class="fas fa-user"> My account</i>
+        </a>
+        <a href="" class="topnavA" style="right:208px;top: 42px;"> <i class="fas fa-search"></i>
+        </a>
+        <a href="" class="topnavA" style="right: 167px;top: 42px;"> <i class="fas fa-heart"></i>
+        </a>
+        <a href="" class="topnavA" style="right: 128px;top: 42px;"> <i class="fas fa-shopping-cart"></i>
+        </a>
+        <a href="" class="topnavA" id="special" href="" style="width: 25px;height: 25px;background-color: #ffe605;text-align:center;border-radius: 50px;line-height: 24px;right:95px;text-decoration: none;">0</a>
+        <a href="" class="topnavA" style="right:20px;top: 42px;">USD ∨</a>
+    </nav>
+    <nav class="topnav2">
+        <div style="position: absolute;top: 58px;left:7px;">
+            <img  src="jpg2/logo.jpg" alt="">
+            <p style="font-size: 18px;letter-spacing:8px;">Healtly Food</p>
+        </div>
+            <a href="" class="topnav2A" style="top: 90px;right: 480px;"><B>HOME</B></a>
+            <a href="" class="topnav2A" style="top: 90px;right: 383px;"><B>ABOUT US</B></a>
+            <a href="" class="topnav2A" style="top: 90px;right: 250px;"><B>COLLECTIONS</B></a>
+            <a href="" class="topnav2A" style="top: 90px;right: 190px;"><B>BLOG</B></a>
+            <a href="" class="topnav2A" style="top: 90px;right: 130px;"><B>SALE</B></a>
+            <a href="" class="topnav2A" style="top: 90px;right: 15px;"><B>CONTACT US</B></a>
+    </nav>
+
+    <div class="wrap">
+        <div class="item">
+            <div class="lPic"><img src="/jpg2/asset 14.jpg" alt="哈密瓜"></div>
+            <div class="rText">
+                <P style="margin-top: 80px;">FresH and<br>Delicious</P>
+                <p style="font-size: 50px;color: #ffe605;margin-top: -60px;">ALL YEAR<br>ROUND</p>
+                <div class="ReadMore"> 
+                    <a class="ReadMoreA" href="">READ MORE</a>
+                </div>
+            </div>
+        </div>
+        <nav class="picNav">
+            <a href="">
+                <img src="/jpg2/asset 50.jpg" alt=" 蘋果">
+                <p>Fresh Fruits</p>
+            </a>
+            <a href="">
+                <img src="/jpg2/asset 51.jpg" alt="番茄">
+                <p>Veggies</p>
+            </a>
+            <a href="">
+                <img src="/jpg2/asset 52.jpg" alt="葉子">
+                <p>Fish</p>
+            </a>
+            <a href="">
+                <img src="/jpg2/asset 53.jpg" alt="地瓜">
+                <p>Nuts & Seeds</p>
+            </a>
+            <a href="">
+                <img src="/jpg2/asset 54.jpg" alt="吐司">
+                <p>Bread</p>
+            </a>
+            <a href="">
+                <img src="/jpg2/asset 55.jpg" alt="牛奶">
+                <p>Dairy</p>
+            </a>
+        </nav>
+        <div class="threePic">
+            <div class="picOen" style="position: relative;">
+                <img src="/jpg2/asset 56.jpg" alt="紫花椰菜">
+                <h1 style="top: 555px;left: 60px;" class="test">Best Quality Products</h1>
+                <a class="test" href="">Shop now</a>
+            </div>
+            <div class="picTwo">
+                <div style="position: relative;">
+                    <img src="/jpg2/asset 57.jpg" alt="甜菜根">
+                    <h1 style="top: 165px;left: 40px;" class="test">Hot Deals:<br>CRAZY PRICE $2.99</h1>
+                    <a style="top: 310px;left: 40px;" class="test" href="">Shop now</a>
+                </div>
+                <div style="position: relative;">
+                    <img src="/jpg2/asset 58.jpg" alt="柳丁">
+                    <h1 style="top: 100px;left: 40px;" class="test">HURRY UP!</h1>
+                    <p class="test">Don't miss your chance to be the first!</p>
+                    <a style="top: 237px;left:40px;" class="test" href="">Shop now</a>
+                </div>
+            </div>
+        </div>
+        <div class="canning">
+            <nac class="canNav">
+                <h2>Featured Products</h2>
+                <a style="position: relative;left: 455px;bottom: 5px; height: 35px;width: 35px;border: 2px solid #aaa;text-align: center;line-height: 35px;font-size: 20px;"> <b><</b> </a>
+                <a style="position: relative;left: 470px;bottom: 5px; height: 35px;width: 35px;border: 2px solid #aaa;text-align: center;line-height: 35px;font-size: 20px;"> <b>></b> </a>
+            </nac>
+            <div class="can" >
+                <div id="fzSet"><img src="jpg2/asset 9.jpg" alt="">
+                    <a href="">P28 Foods Formulated...</a>
+                    <p>$20.00-$26.00</p>
+                    <a id="a" href=""><i class="fas fa-shopping-cart">ADD TO CART</i></a>
+                    <a id="b" href=""><i class="far fa-eye"></i></a>
+                    <a id="b" href=""><i class="fas fa-heart"></i></a>
+                </div>
+                <div id="fzSet"><img src="jpg2/asset 10.jpg" alt="">
+                    <a href="">P28 Foods Formulated...</a>
+                    <p>$29.00-$36.00</p>
+                    <a id="a" href=""><i class="fas fa-shopping-cart">ADD TO CART</i></a>
+                    <a id="b" href=""><i class="far fa-eye"></i></a>
+                    <a id="b" href=""><i class="fas fa-heart"></i></a>
+                </div>
+                <div id="fzSet"><img src="jpg2/asset 11.jpg" alt="">
+                    <a href="">KIND Nuts & Spices, ...</a>
+                    <p>$12.00-$30.00</p>
+                    <a id="a" href=""><i class="fas fa-shopping-cart">ADD TO CART</i></a>
+                    <a id="b" href=""><i class="far fa-eye"></i></a>
+                    <a id="b" href=""><i class="fas fa-heart"></i></a>
+                </div>
+                <div id="fzSet"><img src="jpg2/asset 12.jpg" alt="">
+                    <a href="">Justin's Nut Butter ...</a>
+                    <p>$22.00-$33.00</p>
+                    <a id="a" href=""><i class="fas fa-shopping-cart">ADD TO CART</i></a>
+                    <a id="b" href=""><i class="far fa-eye"></i></a>
+                    <a id="b" href=""><i class="fas fa-heart"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
