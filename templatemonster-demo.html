@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/c604764fdd.js" crossorigin="anonymous"></script>
+    <title>Hello, world!</title>
+    <style>
+        #topNav {
+            border-bottom: 1px solid #efefef;
+            height: 53px;
+            /* width: 100%; */
+        }
+
+        #topNav div {
+            margin: auto;
+            max-width: 900px;
+            min-width: 30px;
+        }
+
+        #topNav button {
+            border: 0;
+            background-color: #fff;
+        }
+
+        #topNav input {
+            border: 0;
+            width: 100px;
+        }
+
+        #shoppingCar {
+            margin-right: 30px;
+            position: relative;
+        }
+
+        /* #shoppingCar:hover {
+            transition: .25s;
+            color: #ffa396;
+        } */
+        /* #search:hover {
+            transition: .25s;
+            color: #ffa396;
+        } */
+        #topNav button:hover {
+            transition: .25s;
+            color: #ffa396;
+        }
+
+        #shoppingCar::after {
+            position: absolute;
+            content: 'o';
+            border: 1px solid #000;
+            border-radius: 50px;
+            width: 18px;
+            height: 18px;
+            background-color: #fff;
+            top: -5px;
+            left: 18px;
+            font-size: 14px;
+        }
+
+        #logoNav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        #logoIcon {
+            border-bottom: solid 1px #efefef;
+        }
+
+        #icon a i {
+            margin: 0px 12px;
+            color: #bbb;
+        }
+
+        #iconBar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+
+        }
+
+        #icon i:hover {
+            color: #000;
+            transition: .5s;
+        }
+
+        .dropdown b {
+            margin-right: 60%;
+        }
+
+        .dropdown button {
+            font-size: 20PX;
+            border-color: #fff;
+        }
+
+        .dropdown button:hover {
+            border-color: #fff;
+        }
+
+        #girlimg {
+            position: relative;
+        }
+
+
+        #girlimg::before {
+            position: absolute;
+            content: "JOIN OUR DISCOUNT CLUB & SAVE 25% ON EVERYTHING!";
+            left: 20px;
+            top: 20px;
+            color: #fff;
+            letter-spacing: 4px;
+        }
+
+        #girlimg a {
+            position: absolute;
+            text-decoration: none;
+            color: #000;
+            width: 130px;
+            height: 35px;
+            background-color: #fff;
+            bottom: 0px;
+            left: 40%;
+            text-align: center;
+        }
+
+        #girlimg a:hover {
+            color: #fff;
+            background-color: #000;
+            transition: .4s;
+        }
+
+        .row,
+        .m0 {
+            margin: 0;
+        }
+
+        #textRow div {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #textRow a {
+            text-decoration: none;
+            /* text-align: center;
+            align-items: center; */
+        }
+
+        #textRow .title1 h2 {
+            font-family: "six caps";
+            color: #7dd0dc;
+            font-size: 60px;
+            letter-spacing: 2px;
+        }
+
+        #textRow .title2 h2 {
+            font-family: "six Caps";
+            color: #d4bcb5;
+            font-size: 60px;
+            letter-spacing: 2px;
+        }
+
+        #textRow .title3 h2 {
+            font-family: "six Caps";
+            color: #FFa396;
+            font-size: 60px;
+            letter-spacing: 2px;
+        }
+
+        #textRow p {
+            color: #000;
+        }
+
+        #textRow div {
+            margin: auto;
+            margin-top: 50px;
+            height: 150px;
+            border-bottom: #aaa solid 1px;
+            position: relative;
+        }
+
+        #textRow div:nth-child(1) {
+            border-top: #7dd0dc solid 1px;
+        }
+
+        #textRow div:nth-child(1)::before {
+            background-color: #7dd0dc;
+            content: "";
+            width: 35px;
+            height: 2px;
+            position: absolute;
+            top: 0;
+        }
+
+
+        #textRow div:nth-child(2) {
+            border-top: #d4bcb5 solid 1px;
+        }
+
+        #textRow div:nth-child(2)::before {
+            background-color: #d4bcb5;
+            content: "";
+            width: 35px;
+            height: 2px;
+            position: absolute;
+            top: 0;
+        }
+
+
+        #textRow div:nth-child(3) {
+            border-top: #FFa396 solid 1px;
+            margin-bottom: 50px;
+        }
+
+        #textRow div:nth-child(3)::before {
+            background-color: #FFa396;
+            content: "";
+            width: 35px;
+            height: 2px;
+            position: absolute;
+            top: 0;
+        }
+
+        #textRow div:hover {
+            transform: scale(1.05);
+            transition: .4s;
+        }
+
+        #hair {
+            margin: auto;
+            height: 330px;
+            background: url(jpg4/promo_block_img.jpg) 50%;
+        }
+
+        #hair {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #hair h3 {
+            font-size: 55px;
+            color: #fff;
+        }
+
+        #hair h6 {
+            line-height: 70px;
+            font-size: 60px;
+        }
+
+        #hair a {
+            display: block;
+            text-decoration: none;
+            border: #000 solid 4px;
+            background-color: #fff;
+            width: 120px;
+            height: 40px;
+            text-align: center;
+            color: #000;
+            line-height: 30px;
+        }
+
+        #hair a:hover {
+            background-color: #000;
+            color: #fff;
+            transition: .4s;
+        }
+
+        #BROWSE {
+            text-align: center;
+            font-size: 25px;
+            line-height: 120px;
+        }
+
+        #fourPic h3 {
+            line-height: 140px;
+            font-size: 17px;
+        }
+
+        #fourPic a {
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+            text-align: center;
+            color: #000;
+            margin: 30px 0px;
+        }
+
+        #item h3 {
+            padding-top: 30px;
+            line-height: 100px;
+        }
+
+        #item p {
+            margin: auto;
+            width: 100px;
+            height: 40px;
+            border: #000 3px solid;
+            margin-bottom: 70px;
+        }
+
+        #fourPic div div {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            border-left: #eee 1px solid;
+            border-right: #eee 1px solid;
+            border-bottom: #eee 1px solid;
+            width: 100%;
+        }
+
+        #fourPic #item:hover {
+            transition: .4s;
+            background-color: #feede9;
+        }
+
+        #fourPic #item:hover p {
+            transition: .4s;
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body class="container-fuild">
+    <nav class="row m0" id="topNav">
+        <div class="col-6 justify-content-start d-flex px-5">
+            <button><i class="fa fa-bars"></i></button>
+        </div>
+        <div class="col-6 justify-content-end d-flex px-5">
+            <button><i id="shoppingCar" class="fa fa-shopping-cart"></i></button>
+            <input type="text" placeholder="Search store">
+            <button><i id="search" class="fa fa-search"></i></button>
+        </div>
+    </nav>
+    <nav class="row m0" id="logoIcon">
+        <div id="logoNav" class="col-12 col-md-10">
+            <img src="jpg4/logo.jpg" alt="">
+        </div>
+        <div class="col-12 col-md-2" id="iconBar">
+            <div id="icon">
+                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook-f"></i></a>
+                <a href=""><i class="fab fa-youtube"></i></a>
+                <a href=""><i class="fab fa-pinterest"></i></a>
+                <a href=""><i class="fab fa-google-plus-g"></i></a>
+            </div>
+        </div>
+    </nav>
+    <div class="row m0">
+        <div class="col-12" id="STYLEFACTORY">
+            <div class="dropdown w-100">
+                <button class="btn btn-secondary dropdown-toggle text-dark bg-white text-left w-100" type="button"
+                    id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <b>STYLE FACTORY</b>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row m0" id="girlimg">
+        <img class="w-100" src="/jpg4/greeting_image.jpg" alt="">
+        <a href="">JOIN NOW<i class="far fa-arrow-alt-circle-right"></i></a>
+    </div>
+    <div class="row" id="textRow">
+        <div class="col-10 col-md-3">
+            <a class="title1" href="">
+                <h2>NEW ARRIVALS</h2>
+                <p>SEE OUR LATEST MUST-HAVES >></p>
+            </a>
+        </div>
+        <div class="col-10 col-md-3">
+            <a class="title2" href="">
+                <h2>WE LOVE ♡</h2>
+                <p>CHECK OUT STYLISH FAVORITES >></p>
+            </a>
+        </div>
+        <div class="col-10 col-md-3">
+            <a class="title3" href="">
+                <h2>FREE SHIPPING</h2>
+                <p>ON ALL 2016 COLLECTION >></p>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-11" id="hair">
+            <h3><b>HAIR</b></h3>
+            <h6>EXTENSIONS</h6>
+            <p>ADD LENGTH & VOLUME IN SECONDS</p>
+            <a href=""><b>ReadMore</b></a>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-10 m-auto" id="BROWSE">
+            <p><b>BROWSE</b> OUR CATEGORIES</p>
+        </div>
+    </div>
+    <div class="row" id="fourPic">
+        <div class="col-11 col-md-3 mx-auto">
+            <a class="" href="">
+                <img class="w-100" src="/jpg4/category1_c699b5ea-b75e-4185-9a8e-2a65b0fc3814_430x396_crop_top.jpg"
+                    alt="">
+                <div id="item">
+                    <h3>MEN’S HAIR CARE</h3>
+                    <p>7 products</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-11 col-md-3 mx-auto">
+            <a class="" href="">
+                <img class="w-100" src="/jpg4/category2_430x396_crop_top.jpg" alt="">
+                <div id="item">
+                    <h3>HAIR STYLING</h3>
+                    <p>13 products</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-11 col-md-3 mx-auto">
+            <a class="" href="">
+                <img class="w-100" src="/jpg4/category3_430x396_crop_top.jpg" alt="">
+                <div id="item">
+                    <h3>HAIR HEALTH TREATMENT</h3>
+                    <p>9 products</p>
+                </div>
+            </a>
+        </div>
+        <div class="col-11 col-md-3 mx-auto">
+            <a class="" href="">
+                <img class="w-100" src="/jpg4/category4_430x396_crop_top.jpg" alt="">
+                <div id="item">
+                    <h3>HAIR CARE FOR KIDS</h3>
+                    <p>7 products</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
