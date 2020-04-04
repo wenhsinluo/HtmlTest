@@ -128,14 +128,13 @@
       Ul.appendChild(li);
       if (A == 4) {
         span.className = "label label-success";
-        Answer.innerHTML = "恭喜猜中!!";
       }
       else {
         span.className = "label label-danger";
-        Answer.innerHTML = "開始猜吧!!";
       }
       li.appendChild(span);
       document.getElementById("userGuess").value = null;
+      Answer.innerHTML = "開始猜吧!!";
     }
     function getAnswer() {
       Answer.innerHTML = number;
