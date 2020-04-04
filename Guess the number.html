@@ -86,6 +86,7 @@
         var number;
         var min = 0;
         var max = 100;
+        var h1 = document.getElementById("H1")
         //var Btn = 
         function add(abc) {
             document.getElementById('Input').value += abc.innerText;
@@ -104,8 +105,6 @@
         function check() {
             if (document.getElementById('Input').value > min & document.getElementById('Input').value < max) {
                 var _input = document.getElementById('Input').value;
-                console.log(_input);
-                var h1 = document.getElementById("H1")
                 if (_input > number) {
                     max = _input;
                     h1.innerText = `${min}~${max}`;
