@@ -91,6 +91,9 @@
     }
 
     function guess() {
+      if(document.getElementById("userGuess").value.toString().length>4){
+        break;
+      }
       var A = 0;
       var B = 0;
       var li = document.createElement("li");
