@@ -89,9 +89,10 @@
       }
       Answer.innerHTML = "開始猜吧!!";
     }
-
     function guess() {
-      if (document.getElementById("userGuess").value.toString().length != 4) {
+      Guess = document.getElementById("userGuess").value.toString();
+      if (Guess.length != 4 || Guess[0] == Guess[1] || Guess[0] == Guess[2] || Guess[0] == Guess[3] || Guess[1] == Guess[2] || Guess[1] == Guess[3] || Guess[2] == Guess[3]) {
+        Answer.innerHTML = "請輸入4位不重複數字"
         return;
       }
       var A = 0;
@@ -99,7 +100,6 @@
       var li = document.createElement("li");
       li.className = "list-group-item";
       var span = document.createElement("span");
-      Guess = document.getElementById("userGuess").value.toString();
       if (Guess[0] == number[0]) {
         A++;
       }
@@ -132,10 +132,10 @@
       else {
         span.className = "label label-danger";
       }
-
       li.appendChild(span);
+      document.getElementById("userGuess").value = null;
+      Answer.innerHTML = "開始猜吧!!";
     }
-
     function getAnswer() {
       Answer.innerHTML = number;
     }
