@@ -24,7 +24,6 @@
 </head>
 
 <body>
-    <tr  ></tr>
     <script>
         var ONandOFF = false;
         var ipad = [];
@@ -44,7 +43,7 @@
                 addThead(ipad);
                 addTbody(ipad);
             }
-            xhr.open("GET", "https://bs-frontend.azurewebsites.net/api/Apple/IPad");
+            xhr.open("GET","https://bs-frontend.azurewebsites.net/api/Apple/IPad");
             xhr.send();
         }
         function addThead(list) {
@@ -123,5 +122,4 @@
         }
     </script>
 </body>
-
 </html>
