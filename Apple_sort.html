@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        th,
+        td {
+            border: 3px double #00f;
+        }
+        body {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+        th:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <tr  ></tr>
+    <script>
+        var ONandOFF = false;
+        var ipad = [];
+        var body = document.getElementsByTagName("body")[0];
+        var table = document.createElement("table");
+        var thead = document.createElement("thead");
+        var tbody = document.createElement("tbody");
+        var theadTr = document.createElement("tr");
+        body.appendChild(table);
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        thead.appendChild(theadTr);
+        window.onload = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                ipad = JSON.parse(this.responseText);
+                addThead(ipad);
+                addTbody(ipad);
+            }
+            xhr.open("GET", "http://127.0.0.1:5501/iPad.json");
+            xhr.send();
+        }
+        function addThead(list) {
+            theadTr.innerHTML = "";
+            for (var item in list.products[0]) {
+                var th = document.createElement("th");
+                th.textContent = item;
+                th.setAttribute("onclick", "_event(this.textContent)");
+                theadTr.appendChild(th);
+            }
+        }
+        function addTbody(list) {
+            tbody.innerHTML = "";
+            for (var i = 0; i < list.products.length; i++) {
+                var tbodyTr = document.createElement("tr");
+                for (var item in list.products[i]) {
+                    var td = document.createElement("td");
+                    if (item == "picture") {
+                        var img = document.createElement("img");
+                        let div = document.createElement('div');
+                        img.src = list.products[i][item];
+                        div.style.width = '80px';
+                        img.setAttribute("style", "width:100%;");
+                        div.appendChild(img);
+                        td.appendChild(div);
+                        tbodyTr.appendChild(td);
+                    }
+                    else {
+                        td.textContent = list.products[i][item];
+                        tbodyTr.appendChild(td);
+                    }
+                }
+                tbody.appendChild(tbodyTr);
+            }
+        }
+        function _event(list) {
+            var list2 = { "products": [] };
+            list2.products = ipad.products.sort(function (a, b) {
+                if (typeof (a[list]) == "number") {
+                    if (ONandOFF == true) {
+                        return b[list] - a[list];
+                    }
+                    else {
+                        return a[list] - b[list];
+                    }
+                }
+                else if (typeof (a[list]) == "string") {
+                    if (ONandOFF == true) {
+                        if (a[list] > b[list]) {
+                            return 1;
+                        }
+                        else if (a[list] < b[list]) {
+                            return -1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+                    else {
+                        if (a[list] < b[list]) {
+                            return 1;
+                        }
+                        else if (a[list] > b[list]) {
+                            return -1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+                }
+            });
+            if (ONandOFF == true) { ONandOFF = false; }
+            else { ONandOFF = true }
+            addThead(list2);
+            addTbody(list2);
+        }
+    </script>
+</body>
+
+</html>
