@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrap {
+            width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        button {
+            width: 300PX;
+            height: 120PX;
+            background-color: #ccc;
+            font-size: 60px;
+        }
+
+        #wrap button:nth-child(2) {
+            color: #f00;
+        }
+
+        #wrap button:nth-child(3) {
+            color: #eee;
+        }
+
+        #wrap button:nth-child(4) {
+            color: #000;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        img {
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <h1>iPhone</h1>
+        <button onclick="red()">Red</button>
+        <button onclick="white()">White</button>
+        <button onclick="black()">Black</button>
+    </div>
+    <script>
+        var wrap = document.getElementById("wrap");
+        var img = document.createElement("img");
+        wrap.appendChild(img);
+        // var table = documetn.createElement("table");
+        // var thead = document.createElement("thead");
+        // var tbody = document.createElement("tbody");
+        // var tr = document.createElement("tr");
+        // var td = document.createElement("td");
+        // wrap.appendChild(table);
+        // wrap.appendChild(thead);
+        // wrap.appendChild(tbody);
+        // thead.appendChild(tr);
+        // tbody.appendChild(tr);
+        var products = {
+            Mac: {
+            },
+            iPhone: {
+                p01: {
+                    id: "p01", color: "red", price: "800", storage: "64G", network: "wifi", pic: "p01.jpg", url: "appleImg/iphone11-red-select-2019.jpg"
+                },
+                p02: {
+                    id: "p02", color: "white", price: "1000", storage: "128G", network: "wifi", pic: "p01.jpg", url: "appleImg/iphone11-white-select-2019.jpg"
+                },
+                p03: {
+                    id: "p03", color: "black", price: "1200", storage: "256G", network: "wifi", pic: "p01.jpg", url: "appleImg/iphone11-black-select-2019.jpg"
+                }
+            },
+            iPad: {
+            },
+            Watch: {
+            }
+        }
+        function red() {
+            img.src = products.iPhone.p01.url;
+        }
+        function black() {
+            img.src = products.iPhone.p03.url;
+        }
+        function white() {
+            img.src = products.iPhone.p02.url;
+        }
+    </script>
+</body>
+
+</html>
