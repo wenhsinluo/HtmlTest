@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../Modules/MyHelper.js"></script>
+
+</head>
+
+<body>
+    <div id="div"></div>
+    <template id="templateTitle">
+    </template>
+    <template id="templateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
+    <script>
+        
+        var Zipcode = [];
+        var div = document.querySelector("#div");
+        var body = document.querySelector('body');
+        var table =document.createElement('table');
+        table.setAttribute("border", "2");
+        var thead =document.createElement('thead');
+        var tbody =document.createElement('tbody');
+        // var htr = document.createElement("tr");
+        // thead.appendChild(htr);
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        body.appendChild(table);
+        var msg = document.querySelector('#msg');
+        var ipad = "";
+        window.onload = function () {
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    ipad = JSON.parse(this.responseText);
+                    for (let i = 0; i < ipad.length; i++) {
+                        Zipcode.push({ City: ipad[i].CityName, Districts: [] });
+                        for (let x = 0; x < ipad[i].AreaList.length; x++) {
+                            Zipcode[i].Districts.push({ District: ipad[i].AreaList[x].AreaName, ZipCode: ipad[i].AreaList[x].ZipCode });
+                        }
+                    }
+                    addThead(Zipcode);
+                }
+                else {
+                    msg.textContent = '發生錯誤，HTTP response代碼：' + xhr.status;
+                }
+            }
+            xhr.open("GET","https://raw.githubusercontent.com/2opex/Portfolio/master/JS/TaiwanAddress/TaiwanAddress.json");
+            xhr.send();
+        }
+        function addThead(list) {
+            for (var i = 0; i < list.length; i++) {
+                // var th = document.createElement("th")
+                // th.textContent = list[i].City;
+                // thead.appendChild(th);
+                for (var x = 0; x < list[i].Districts.length; x++) {
+                    var th = document.createElement("th")
+                    th.textContent = list[i].City;
+                    var btr = document.createElement('tr');
+                    btr.appendChild(th);
+                    var td = document.createElement("td");
+                    td.textContent = list[i].Districts[x].District;
+                    btr.appendChild(td);
+                    var td = document.createElement("td");
+                    td.innerText = list[i].Districts[x].ZipCode;
+                    btr.appendChild(td);
+                    thead.appendChild(btr);
+                }
+            }
+        }
+        // function addTbody(list) {
+        //     for (let x = 0; list[0].Districts.length; x++) {
+        //         var td = document.createElement("td")
+        //         td.textContent = list[i].City;
+        //     }
+        // }
+    </script>
+</body>
+
+</html>
