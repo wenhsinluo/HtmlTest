@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>LOL</title>
+    <style>
+        #Div p{
+            /* font-family: "fantasy"; */
+            font-family: "微軟正黑體";
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            opacity: 0;
+            z-index: 2;
+        }
+        #Div:hover p{
+            opacity: 1;
+        }
+        #Div:hover {
+            position: relative;
+            transform: scale(1.1);
+            transition: .3s;
+            z-index: 2;
+        }
+        #Div:hover::after{
+            transition: 1;
+            position: absolute;
+            content: "";
+            top: 250px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, .8);
+        }
+    </style>
+</head>
+
+<body>
+    <template id="templateTable">
+        <tr></tr>
+    </template>
+    <template id="heroModal">
+        <div  class="modal  fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered " role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark border-dark text-white">
+                        <h5 class="modal-title" id="exampleModalCenterTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body bg-dark text-white" id="heroData">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        let heroModal = document.getElementById("heroModal");
+        let CheroModal = heroModal.content.cloneNode(true);
+        let body = document.getElementsByTagName("body")[0];
+        let table = document.createElement("table");
+        let tbody = document.createElement("tbody");
+        body.className = "mx-auto bg-dark";
+        body.appendChild(table);
+        table.appendChild(tbody);
+        const heroes = {
+            "heroes": [
+                {
+                    "name": "牛頭酋長 亞歷斯塔 Alistar",
+                    "HP": "生命：600 (+106 每級)",
+                    "energy": "魔力：350 (+40 每級)",
+                    "attack": "物理攻擊：62 (+3.75 每級)",
+                    "attackRange": "攻擊距離：125",
+                    "physicalDefense": "物理防禦：44 (+3.5 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：330",
+                    "img": "RiotX_ChampionList_alistar.jpg"
+                },
+                // {
+                //     "name": "隻影刺客 阿卡莉 Akali",
+                //     "HP": "生命：575 (+95 每級)",
+                //     "energy": "能量：200 (+0 每級)",
+                //     "attack": "物理攻擊：62.4 (+3.3 每級)",
+                //     "attackRange": "攻擊距離：125",
+                //     "physicalDefense": "物理防禦：23 (+3.5 每級)",
+                //     "magicDefense": "魔法防禦：37 (+1.25 每級)",
+                //     "movingSpeed": "移動速度：345",
+                //     "img": "RiotX_ChampionList_akali.jpg"
+                // },
+                {
+                    "name": "英勇投彈手 庫奇 Corki",
+                    "HP": "生命：518 (+87 每級)",
+                    "energy": "魔力：350.16 (+34 每級)",
+                    "attack": "物理攻擊：55 (+2.5 每級)",
+                    "attackRange": "攻擊距離：550",
+                    "physicalDefense": "物理防禦：28 (+3.5 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：325",
+                    "img": "RiotX_ChampionList_corki.jpg"
+                },
+                {
+                    "name": "亙古之懼 費德提克 Fiddlesticks",
+                    "HP": "生命：580.4 (+92 每級)",
+                    "energy": "魔力：500 (+28 每級)",
+                    "attack": "物理攻擊：55.36 (+2.625 每級)",
+                    "attackRange": "攻擊距離：480",
+                    "physicalDefense": "物理防禦：34 (+3.5 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：335",
+                    "img": "RiotX_ChampionList_fiddlesticks.jpg"
+                },
+                {
+                    "name": "孤高劍客 菲歐拉 Fiora",
+                    "HP": "生命：550 (+85 每級)",
+                    "energy": "魔力：300 (+40 每級)",
+                    "attack": "物理攻擊：68 (+3.3 每級)",
+                    "attackRange": "攻擊距離：150",
+                    "physicalDefense": "物理防禦：33 (+3.5 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：345",
+                    "img": "RiotX_ChampionList_fiora.jpg"
+                },
+                {
+                    "name": "深海頑童 飛斯 Fizz",
+                    "HP": "生命：570 (+98 每級)",
+                    "energy": "魔力：317.2 (+37 每級)",
+                    "attack": "物理攻擊：58.04 (+3 每級)",
+                    "attackRange": "攻擊距離：175",
+                    "physicalDefense": "物理防禦：22.412 (+3.4 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：335",
+                    "img": "RiotX_ChampionList_fizz.jpg"
+                },
+                {
+                    "name": "蒂瑪西亞楷模 嘉文四世 Jarvan IV",
+                    "HP": "生命：570 (+90 每級)",
+                    "energy": "魔力：300 (+40 每級)",
+                    "attack": "物理攻擊：64 (+3.4 每級)",
+                    "attackRange": "攻擊距離：175",
+                    "physicalDefense": "物理防禦：34 (+3.6 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：340",
+                    "img": "RiotX_ChampionList_jarvaniv.jpg"
+                },
+                {
+                    "name": "虛空行者 卡薩丁 Kassadin",
+                    "HP": "生命：576 (+90 每級)",
+                    "energy": "魔力：397.6 (+67 每級)",
+                    "attack": "物理攻擊：58.852 (+3.9 每級)",
+                    "attackRange": "攻擊距離：150",
+                    "physicalDefense": "物理防禦：19 (+2.8 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：335",
+                    "img": "RiotX_ChampionList_kassadin.jpg"
+                },
+                {
+                    "name": "虛空掠食者 卡力斯 Kha'Zix",
+                    "HP": "生命：572.8 (+85 每級)",
+                    "energy": "魔力：327.2 (+40 每級)",
+                    "attack": "物理攻擊：63 (+3.1 每級)",
+                    "attackRange": "攻擊距離：125",
+                    "physicalDefense": "物理防禦：36 (+3 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：350",
+                    "img": "RiotX_ChampionList_khazix.jpg"
+                },
+                {
+                    "name": "深淵巨口 寇格魔 Kog'Maw",
+                    "HP": "生命：534 (+88 每級)",
+                    "energy": "魔力：325 (+40 每級)",
+                    "attack": "物理攻擊：61 (+3.11 每級)",
+                    "attackRange": "攻擊距離：500",
+                    "physicalDefense": "物理防禦：24 (+3.5 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：330",
+                    "img": "RiotX_ChampionList_kogmaw.jpg"
+                },
+                {
+                    "name": "盲眼武僧 李星 Lee Sin",
+                    "HP": "生命：575 (+85 每級)",
+                    "energy": "能量：200 (+0 每級)",
+                    "attack": "物理攻擊：70 (+3.2 每級)",
+                    "attackRange": "攻擊距離：125",
+                    "physicalDefense": "物理防禦：33 (+3.7 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：345",
+                    "img": "RiotX_ChampionList_leesin.jpg"
+                },
+                {
+                    "name": "黎明之光 雷歐娜 Leona",
+                    "HP": "生命：576.16 (+87 每級)",
+                    "energy": "魔力：302.2 (+40 每級)",
+                    "attack": "物理攻擊：60.04 (+3 每級)",
+                    "attackRange": "攻擊距離：125",
+                    "physicalDefense": "物理防禦：47 (+3.6 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：335",
+                    "img": "RiotX_ChampionList_leona.jpg"
+                },
+                {
+                    "name": "賞金獵人 好運姐 Miss Fortune",
+                    "HP": "生命：541 (+91 每級)",
+                    "energy": "魔力：325.84 (+35 每級)",
+                    "attack": "物理攻擊：50 (+2.7 每級)",
+                    "attackRange": "攻擊距離：550",
+                    "physicalDefense": "物理防禦：28 (+3 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：325",
+                    "img": "RiotX_ChampionList_missfortune.jpg"
+                },
+                {
+                    "name": "齊天大聖 悟空 Wukong",
+                    "HP": "生命：540 (+85 每級)",
+                    "energy": "魔力：300 (+45 每級)",
+                    "attack": "物理攻擊：68 (+4 每級)",
+                    "attackRange": "攻擊距離：175",
+                    "physicalDefense": "物理防禦：34 (+3.5 每級)",
+                    "magicDefense": "魔法防禦：28 (+1.25 每級)",
+                    "movingSpeed": "移動速度：345",
+                    "img": "RiotX_ChampionList_monkeyking.jpg"
+                },
+                {
+                    "name": "沙漠屠夫 雷尼克頓 Renekton",
+                    "HP": "生命：575 (+87 每級)",
+                    "energy": "怒氣：100 (+0 每級)",
+                    "attack": "物理攻擊：69 (+3.75 每級)",
+                    "attackRange": "攻擊距離：125",
+                    "physicalDefense": "物理防禦：35 (+4 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：345",
+                    "img": "RiotX_ChampionList_renekton.jpg"
+                },
+                {
+                    "name": "破刃放逐者 雷玟 Riven",
+                    "HP": "生命：560 (+86 每級)",
+                    "energy": "無消耗",
+                    "attack": "物理攻擊：64 (+3 每級)",
+                    "attackRange": "攻擊距離：125",
+                    "physicalDefense": "物理防禦：33 (+3.2 每級)",
+                    "magicDefense": "魔法防禦：32.1 (+1.25 每級)",
+                    "movingSpeed": "移動速度：340",
+                    "img": "RiotX_ChampionList_riven.jpg"
+                },
+                {
+                    "name": "神影刺客 塔隆 Talon",
+                    "HP": "生命：588 (+95 每級)",
+                    "energy": "魔力：377.2 (+37 每級)",
+                    "attack": "物理攻擊：68 (+3.1 每級)",
+                    "attackRange": "攻擊距離：125",
+                    "physicalDefense": "物理防禦：30 (+3.5 每級)",
+                    "magicDefense": "魔法防禦：39 (+1.25 每級)",
+                    "movingSpeed": "移動速度：335",
+                    "img": "RiotX_ChampionList_talon.jpg"
+                },
+                {
+                    "name": "懲戒之箭 法洛士 Varus",
+                    "HP": "生命：500 (+89 每級)",
+                    "energy": "魔力：360 (+33 每級)",
+                    "attack": "物理攻擊：61 (+3.11 每級)",
+                    "attackRange": "攻擊距離：575",
+                    "physicalDefense": "物理防禦：27 (+3.4 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：330",
+                    "img": "RiotX_ChampionList_varus.jpg"
+                },
+                {
+                    "name": "暗夜獵人 汎 Vayne",
+                    "HP": "生命：515 (+89 每級)",
+                    "energy": "魔力：231.8 (+35 每級)",
+                    "attack": "物理攻擊：60 (+2.36 每級)",
+                    "attackRange": "攻擊距離：550",
+                    "physicalDefense": "物理防禦：23 (+3.4 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：330",
+                    "img": "RiotX_ChampionList_vayne.jpg"
+                },
+                {
+                    "name": "血色收割者 弗拉迪米爾 Vladimir",
+                    "HP": "生命：537 (+96 每級)",
+                    "energy": "消耗生命",
+                    "attack": "物理攻擊：55 (+3 每級)",
+                    "attackRange": "攻擊距離：450",
+                    "physicalDefense": "物理防禦：23 (+3.3 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：330",
+                    "img": "RiotX_ChampionList_vladimir.jpg"
+                },
+                // {
+                //     "name": "遠古魔導 齊勒斯 Xerath",
+                //     "HP": "生命：526 (+92 每級)",
+                //     "energy": "魔力：459 (+22 每級)",
+                //     "attack": "物理攻擊：54.7 (+3 每級)",
+                //     "attackRange": "攻擊距離：525",
+                //     "physicalDefense": "物理防禦：21.88 (+3.5 每級)",
+                //     "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                //     "movingSpeed": "移動速度：340",
+                //     "img": "RiotX_ChampionList_xeratth.jpg"
+                // },
+                {
+                    "name": "魔法爆破專家 希格斯 Ziggs",
+                    "HP": "生命：536 (+92 每級)",
+                    "energy": "魔力：480 (+23.5 每級)",
+                    "attack": "物理攻擊：54.208 (+3.1 每級)",
+                    "attackRange": "攻擊距離：550",
+                    "physicalDefense": "物理防禦：21.544 (+3.3 每級)",
+                    "magicDefense": "魔法防禦：30 (+0.5 每級)",
+                    "movingSpeed": "移動速度：325",
+                    "img": "RiotX_ChampionList_ziggs.jpg"
+                }
+            ]
+        };
+        // window.onload = function () {
+        //     let xhr = new XMLHttpRequest;
+        //     xhr.onload = function () {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             heros = JSON.parse(this.responseText);
+        //         }
+        //         else {
+        //             return;
+        //         }
+        //     }
+        //     xhr.open("GET", "http://127.0.0.1:5501/hero.json");
+        //     xhr.send();
+        // }
+        creattable(heroes);
+        function creattable(list) {
+            let tT = document.getElementById("templateTable");
+            let ctT = tT.content.cloneNode(true);
+            let tr = ctT.querySelector("tr");
+            tr.className = "row col-8 offset-2 bg-secondary ";
+            for (let i = 0; i < list.heroes.length; i++) {
+                for (let item in list.heroes[i]) {
+                    if (item == "img") {
+                        let div = document.createElement("div");
+                        let p = document.createElement("p");
+                        let img = document.createElement("img");
+                        let td = document.createElement("td");
+                        p.textContent=list.heroes[i].name;
+                        td.className = "col-12 col-sm-6 col-md-3"
+                        img.setAttribute("src", `http://127.0.0.1:5501/LOLjpg/${list.heroes[i][item]}`);
+                        div.setAttribute("id", "Div");
+                        img.setAttribute("data-toggle", "modal");
+                        img.setAttribute("data-target", "#exampleModalCenter");
+                        img.setAttribute("onclick", `addModal(${i})`);
+                        img.className = " w-100 btn btn-primary bg-dark border-dark"
+                        div.className = "d-flex w-100 justify-content-center"
+                        div.appendChild(img);
+                        div.appendChild(p);
+                        td.appendChild(div);
+                        tr.appendChild(td);
+                    }
+                }
+            }
+            tbody.appendChild(ctT);
+            tbody.appendChild(CheroModal);
+        }
+        function addModal(item) {
+            let exampleModalCenterTitle = document.getElementById("exampleModalCenterTitle");
+            exampleModalCenterTitle.textContent = heroes.heroes[item].name;
+            let heroData = document.getElementById("heroData");
+            heroData.textContent = null;
+            for (let item2 in heroes.heroes[item]) {
+                if (item2 != "name" && item2 != "img") {
+                    let p = document.createElement("p");
+                    p.textContent += `${heroes.heroes[item][item2]}`;
+                    heroData.appendChild(p);
+                }
+            }
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
