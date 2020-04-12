@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var mapArray;
+        var map;
+        var phone;
+        var address;
+        function _Map() {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    mapArray = JSON.parse(this.responseText);
+                    for (let i = 0; i < mapArray.features.length; i++) {
+                        if (mapArray.features[i].properties.masksLeft > 0 || mapArray.features[i].properties.childMasksLeft > 0) {
+                            // var id = mapArray.features[i].properties.id;
+                            // map.data.loadGeoJson(`https://findmasks.herokuapp.com/places/${id}`);
+                            // map.data.setStyle(function (feature) {
+                            //     phone = feature.getProperty('phone');
+                            //     address = feature.getProperty('address');
+                            // })
+                                var marker = new google.maps.Marker({ position: { lat: mapArray.features[i].geometry.coordinates[1], lng: mapArray.features[i].geometry.coordinates[0] }, icon: "http://maps.google.com/mapfiles/ms/micons/blue-pushpin.png", map: map, title: `${mapArray.features[i].properties.name}\n大人:${mapArray.features[i].properties.masksLeft}\n小孩:${mapArray.features[i].properties.childMasksLeft}`});
+                        }
+                        else {
+                            var marker = new google.maps.Marker({ position: { lat: mapArray.features[i].geometry.coordinates[1], lng: mapArray.features[i].geometry.coordinates[0] }, icon: "http://maps.google.com/mapfiles/ms/micons/caution.png", map: map, title: "沒口罩" });
+                        }
+                    }
+                }
+                else {
+                    console.log("ERROR");
+                }
+            }
+            xhr.open("GET", "https://maskmap.azurewebsites.net/api/mask/getmaskstock");
+            xhr.send();
+        }
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), { zoom: 16, center: { lat: 24.7567151, lng: 120.9519173 } });
+            var marker = new google.maps.Marker({ position: { lat: 24.7567151, lng: 120.9519173 }, map: map, animation: google.maps.Animation.BOUNCE });
+            _Map();
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag&callback=initMap"
+        async defer></script>
+</body>
+
+<!-- map.data.loadGeoJson("https://findmasks.herokuapp.com/places"); -->
+<!-- mapArray.features.length -->
+<!-- http://maps.google.com/mapfiles/ms/micons/caution.png--沒口罩 -->
+<!-- http://maps.google.com/mapfiles/ms/micons/blue-pushpin.png--有口罩 -->
+
+</html>
