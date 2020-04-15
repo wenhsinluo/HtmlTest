@@ -19,11 +19,36 @@
             margin: 0;
             padding: 0;
         }
+
+        .div {
+            background-color: #AADAFF;
+            height: 85px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 40px;
+        }
+
+        button {
+            background-color: #ddd;
+            font-size: 40px;
+            width: 200px;
+            height: 85px;
+            margin-left: 200px;
+        }
+        p{
+            font-size: 16px;
+            margin-right: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <div id="map"></div>
+    <div class="div">
+        <h1>口罩資訊</h1><button onclick="_Map()">載入資料</button><p>載入後可用全螢幕模式瀏覽 ↓</p>
+    </div>
+    <div id="map">
+    </div>
     <script>
         var mapArray;
         var map;
@@ -35,17 +60,18 @@
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     mapArray = JSON.parse(this.responseText);
                     for (let i = 0; i < mapArray.features.length; i++) {
-                        if (mapArray.features[i].properties.masksLeft > 0 || mapArray.features[i].properties.childMasksLeft > 0) {
-                            // var id = mapArray.features[i].properties.id;
-                            // map.data.loadGeoJson(`https://findmasks.herokuapp.com/places/${id}`);
-                            // map.data.setStyle(function (feature) {
-                            //     phone = feature.getProperty('phone');
-                            //     address = feature.getProperty('address');
-                            // })
-                                var marker = new google.maps.Marker({ position: { lat: mapArray.features[i].geometry.coordinates[1], lng: mapArray.features[i].geometry.coordinates[0] }, icon: "http://maps.google.com/mapfiles/ms/micons/blue-pushpin.png", map: map, title: `${mapArray.features[i].properties.name}\n大人:${mapArray.features[i].properties.masksLeft}\n小孩:${mapArray.features[i].properties.childMasksLeft}`});
+                        if (mapArray.features[i].properties.mask_adult > 0 || mapArray.features[i].properties.mask_child > 0) {
+                            let str = `${mapArray.features[i].properties.name}<br><br>地址:${mapArray.features[i].properties.address}<br><br>電話:${mapArray.features[i].properties.phone}<br><br>大人:${mapArray.features[i].properties.mask_adult}<br><br>小孩:${mapArray.features[i].properties.mask_child}<br><br>資料更新時間:${mapArray.features[i].properties.updated}<br><br>營業時段:<br>${mapArray.features[i].properties.available.replace(/、/g,"<br>")}`;
+                            let infowindow = new google.maps.InfoWindow({
+                                content: str
+                            });
+                            let marker = new google.maps.Marker({ position: { lat: mapArray.features[i].geometry.coordinates[1], lng: mapArray.features[i].geometry.coordinates[0] }, icon: "http://maps.google.com/mapfiles/ms/micons/blue-pushpin.png", map: map, title: `${mapArray.features[i].properties.name}\n大人:${mapArray.features[i].properties.mask_adult}\n小孩:${mapArray.features[i].properties.mask_child}` });
+                            marker.addListener('click', function () {
+                                infowindow.open(map, marker);
+                            });
                         }
                         else {
-                            var marker = new google.maps.Marker({ position: { lat: mapArray.features[i].geometry.coordinates[1], lng: mapArray.features[i].geometry.coordinates[0] }, icon: "http://maps.google.com/mapfiles/ms/micons/caution.png", map: map, title: "沒口罩" });
+                            marker = new google.maps.Marker({ position: { lat: mapArray.features[i].geometry.coordinates[1], lng: mapArray.features[i].geometry.coordinates[0] }, icon: "http://maps.google.com/mapfiles/ms/micons/caution.png", map: map, title: "沒口罩" });
                         }
                     }
                 }
@@ -53,19 +79,18 @@
                     console.log("ERROR");
                 }
             }
-            xhr.open("GET", "https://maskmap.azurewebsites.net/api/mask/getmaskstock");
+            xhr.open("GET", "https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json");
             xhr.send();
         }
         function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), { zoom: 16, center: { lat: 24.7567151, lng: 120.9519173 } });
+            map = new google.maps.Map(document.getElementById('map'), { zoom: 13, center: { lat: 24.7567151, lng: 120.9519173 } });
             var marker = new google.maps.Marker({ position: { lat: 24.7567151, lng: 120.9519173 }, map: map, animation: google.maps.Animation.BOUNCE });
-            _Map();
         }
+        // _Map();
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlKWP4uWjQIR3WDAWLAu6rUhBfc3_ppag&callback=initMap"
         async defer></script>
 </body>
-
 <!-- map.data.loadGeoJson("https://findmasks.herokuapp.com/places"); -->
 <!-- mapArray.features.length -->
 <!-- http://maps.google.com/mapfiles/ms/micons/caution.png--沒口罩 -->
