@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>寶可夢圖鑑列表</h1>
+
+    <button id='addone' onclick="appendPokemon()">Click +1</button>
+    <button id='removeone' onclick="removePokemon()">Clear -1</button>
+    <button onclick="AddAllPokemon()">load all</button>
+    <button onclick="ClearAllPokemon()">Clear all</button>
+    <div id="container">
+
+    </div>
+
+
+    <script>
+
+        var fileName = 2;
+
+        var container = document.getElementById('container');
+
+        window.onload = appendPokemonBytemplate();
+
+        function ClearAllPokemon() {
+            while (container.childNodes.length > 0) {
+                container.removeChild(container.lastChild);
+            }
+            fileName = 1;
+        }
+
+        function appendPokemon() {
+            let img = document.createElement('img');
+            img.setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName.toString().padStart(3, '0')}.png`);
+            container.appendChild(img);
+            if (fileName < 890) {
+                fileName++;
+            }
+        }
+
+        function appendPokemonBytemplate() {
+            let fileName = '001';
+            let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
+            let pokemonImg = `<img src='${pathFile}'/>`;
+            container.innerHTML = pokemonImg;
+        }
+
+        function AddAllPokemon() {
+            for (; fileName <= 890; fileName++) {
+                let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName.toString().padStart(3, '0')}.png`;
+                let img = document.createElement("img");
+                img.src = pathFile;
+                container.appendChild(img);
+            }
+            fileName -= 1;
+        }
+
+        function removePokemon() {
+            let len = container.childNodes.length;
+            if (len > 0) {
+                container.removeChild(container.lastChild);
+            }
+            if (fileName > 1) {
+                fileName--;
+            }
+        }
+    </script>
+</body>
+
+</html>
