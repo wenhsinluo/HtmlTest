@@ -21,10 +21,8 @@
 
     <script>
 
-        var fileName = 2;
-
+        var fileName = 1;
         var container = document.getElementById('container');
-
         window.onload = appendPokemonBytemplate();
 
         function ClearAllPokemon() {
@@ -36,7 +34,10 @@
 
         function appendPokemon() {
             let img = document.createElement('img');
+            img.id = `${fileName}`;
             img.setAttribute('src', `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName.toString().padStart(3, '0')}.png`);
+            img.setAttribute('id', `${fileName}`);
+            img.setAttribute('onclick', `clearSelect(this.id)`);
             container.appendChild(img);
             if (fileName < 890) {
                 fileName++;
@@ -44,10 +45,13 @@
         }
 
         function appendPokemonBytemplate() {
-            let fileName = '001';
-            let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName}.png`;
-            let pokemonImg = `<img src='${pathFile}'/>`;
+            let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName.toString().padStart(3, '0')}.png`;
+            let pokemonImg = `<img id=${fileName} src=${pathFile} onclick=clearSelect(this.id)>`;
             container.innerHTML = pokemonImg;
+            if (fileName < 890) {
+                fileName++;
+            }
+
         }
 
         function AddAllPokemon() {
@@ -55,6 +59,8 @@
                 let pathFile = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${fileName.toString().padStart(3, '0')}.png`;
                 let img = document.createElement("img");
                 img.src = pathFile;
+                img.id = `${fileName}`;
+                img.setAttribute('onclick', `clearSelect(this.id)`);
                 container.appendChild(img);
             }
             fileName -= 1;
@@ -68,6 +74,11 @@
             if (fileName > 1) {
                 fileName--;
             }
+        }
+
+        function clearSelect(value) {
+            let item = document.getElementById(`${value}`);
+            container.removeChild(item);
         }
     </script>
 </body>
