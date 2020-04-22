@@ -188,7 +188,7 @@
                 setDay.className = "align-top";
                 weekday.setDate(weekday.getDate() + 1);
                 setDay.textContent = i;
-                while (index <= 9) {
+                while (index <= 50) {
                     if (localStorage.getItem(`${today.getFullYear()}${month}${i}.${index}`) != null) {
                         let p = document.createElement("p");
                         p.textContent = `${index}:` + localStorage.getItem(`${today.getFullYear()}${month}${i}.${index}`)
@@ -204,7 +204,7 @@
             let content = document.getElementById("content");
             content.innerHTML = null;
             index = 1;
-            while (index <= 9) {
+            while (index <= 50) {
                 if (localStorage.getItem(`${id}.${index}`) != null) {
                     let p = document.createElement("div");
                     let deleteBtn = document.createElement("button");
