@@ -178,6 +178,10 @@
                 let setDay = document.querySelectorAll("td")[i];
                 setDay.innerHTML = null;
                 setDay.className = "";
+                setDay.setAttribute("onclick","");
+                setDay.setAttribute("id","");
+                setDay.setAttribute("data-toggle", "");
+                setDay.setAttribute("data-target", "");
             }
             for (let i = 1; weekday.getMonth() + 1 == month; i++) {
                 let setDay = document.querySelectorAll("td")[(i - 1) + week];
