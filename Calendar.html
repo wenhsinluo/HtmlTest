@@ -189,9 +189,9 @@
                 weekday.setDate(weekday.getDate() + 1);
                 setDay.textContent = i;
                 while (index <= 50) {
-                    if (localStorage.getItem(`${today.getFullYear()}${month}${i}.${index}`) != null) {
+                    if (localStorage.getItem(`${today.getFullYear()}${month}${i}9${index}`) != null) {
                         let p = document.createElement("p");
-                        p.textContent = `${index}:` + localStorage.getItem(`${today.getFullYear()}${month}${i}.${index}`)
+                        p.textContent = `${index}:` + localStorage.getItem(`${today.getFullYear()}${month}${i}9${index}`)
                         p.className = "w-25";
                         setDay.appendChild(p);
                     }
@@ -205,14 +205,14 @@
             content.innerHTML = null;
             index = 1;
             while (index <= 50) {
-                if (localStorage.getItem(`${id}.${index}`) != null) {
+                if (localStorage.getItem(`${id}9${index}`) != null) {
                     let p = document.createElement("div");
                     let deleteBtn = document.createElement("button");
                     let div = document.createElement("div");
                     deleteBtn.className = "btn btn-secondary align-right bg-danger ";
                     deleteBtn.innerText = "清除";
-                    deleteBtn.setAttribute("onclick", `DeleteItinerary(${id},${id}.${index})`);
-                    p.textContent = `${index}:` + localStorage.getItem(`${id}.${index}`);
+                    deleteBtn.setAttribute("onclick", `DeleteItinerary(${id},${id}9${index})`);
+                    p.textContent = `${index}:` + localStorage.getItem(`${id}9${index}`);
                     div.appendChild(p);
                     div.appendChild(deleteBtn);
                     content.appendChild(div);
@@ -227,17 +227,17 @@
         function SaveItinerary(id) {
             let input = document.getElementById("input");
             if (input.value != "") {
-                while (localStorage.getItem(`${id}.${index}`) != null) {
+                while (localStorage.getItem(`${id}9${index}`) != null) {
                     index++;
                 }
-                localStorage.setItem(`${id}.${index}`, `${input.value}`);
+                localStorage.setItem(`${id}9${index}`, `${input.value}`);
                 input.value = null;
                 Btn(id);
                 creatData();
             }
             index = 1;
         }
-        function DeleteItinerary(id, key) {
+        function DeleteItinerary(id,key) {
             localStorage.removeItem(key);
             Btn(id);
         }
