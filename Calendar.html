@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Calendar</title>
+
+    <style>
+        .align-top:hover {
+            cursor: pointer;
+            background-color:rgb(59, 59, 247);
+            transform: scale(1.2);
+            transition: .2s;
+            z-index: 2;
+        }
+
+        .topbtn:hover {
+            background-color: rgb(255, 79, 79);
+            cursor: pointer;
+            transition: .3s;
+            z-index: 2;
+        }
+
+        body {
+            background-color: #000;
+        }
+
+        th,
+        td {
+            border: 1px solid #000;
+            height: 100px;
+            background-color: rgb(130, 171, 252);
+        }
+
+        td {
+            max-width: 1px;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+        }
+
+        td p {
+            font-size: 10px;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <table class="col text-center border border-dark">
+                <thead>
+                    <tr>
+                        <th class="topbtn" onclick="lessmonth();" colspan="1">
+                            ◀</th>
+                        <th id="month" colspan="5"></th>
+                        <th class="topbtn" onclick="addmonth();">▶</th>
+                    </tr>
+                    <tr>
+                        <th>星期日</th>
+                        <th>星期一</th>
+                        <th>星期二</th>
+                        <th>星期三</th>
+                        <th>星期四</th>
+                        <th>星期五</th>
+                        <th>星期六</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Launch demo modal
+    </button> -->
+    <div class="modal fade border-dark" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered border-dark" role="document">
+            <div class="modal-content border-dark">
+                <div class="modal-header border-dark bg-secondary">
+                    <h5 class="modal-title border-dark" id="exampleModalCenterTitle">行程記錄</h5>
+                    <button type="button" class="close border-dark" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="content" class="bg-secondary border-dark"></div>
+                <div class="modal-footer bg-secondary border-dark">
+                    <div class=" bg-secondary modal-body border-dark">請輸入行程:
+                        <input type="text" name="" id="input">
+                        <!-- <textarea name="" id="input" cols="30" rows="5"></textarea> -->
+                    </div>
+                    <button id="SaveBtn" type="button" class="btn btn-primary border-dark">確定儲存</button>
+                    <button type="button" class=" border-dark btn btn-secondary bg-danger"
+                        data-dismiss="modal">離開</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var index = 1;
+        var index2 = 0;
+        var localStorage = window.localStorage;
+        creatData();
+        function creatData() {
+            let today = new Date;
+            today.setMonth(today.getMonth() + index2);
+            let month = today.getMonth() + 1;
+            let weekday = today;
+            weekday.setDate(1);
+            let week = weekday.getDay();
+            let th = document.getElementById("month");
+            th.textContent = `${today.getFullYear()}年${month}月份`;
+            for (let i = 0; i < 42; i++) {
+                let setDay = document.querySelectorAll("td")[i];
+                setDay.innerHTML = null;
+                setDay.className = "";
+            }
+            for (let i = 1; weekday.getMonth() + 1 == month; i++) {
+                let setDay = document.querySelectorAll("td")[(i - 1) + week];
+                setDay.setAttribute("id", `${today.getFullYear()}${month}${i}`);
+                setDay.setAttribute("onclick", `Btn(this.id)`);
+                setDay.setAttribute("data-toggle", "modal");
+                setDay.setAttribute("data-target", "#exampleModalCenter");
+                setDay.className = "align-top";
+                weekday.setDate(weekday.getDate() + 1);
+                setDay.textContent = i;
+                while (index <= 9) {
+                    if (localStorage.getItem(`${today.getFullYear()}${month}${i}.${index}`) != null) {
+                        let p = document.createElement("p");
+                        p.textContent = `${index}:` + localStorage.getItem(`${today.getFullYear()}${month}${i}.${index}`)
+                        p.className = "w-25";
+                        setDay.appendChild(p);
+                    }
+                    index++;
+                }
+                index = 1;
+            }
+        }
+        function Btn(id) {
+            let content = document.getElementById("content");
+            content.innerHTML = null;
+            index = 1;
+            while (index <= 9) {
+                if (localStorage.getItem(`${id}.${index}`) != null) {
+                    let p = document.createElement("div");
+                    let deleteBtn = document.createElement("button");
+                    let div = document.createElement("div");
+                    deleteBtn.className = "btn btn-secondary align-right bg-danger ";
+                    deleteBtn.innerText = "清除";
+                    deleteBtn.setAttribute("onclick", `DeleteItinerary(${id},${id}.${index})`);
+                    p.textContent = `${index}:` + localStorage.getItem(`${id}.${index}`);
+                    div.appendChild(p);
+                    div.appendChild(deleteBtn);
+                    content.appendChild(div);
+                }
+                index++;
+            }
+            let btn = document.getElementById("SaveBtn");
+            btn.setAttribute("onclick", `SaveItinerary(${id})`);
+            index = 1;
+            creatData();
+        }
+        function SaveItinerary(id) {
+            let input = document.getElementById("input");
+            if (input.value != "") {
+                while (localStorage.getItem(`${id}.${index}`) != null) {
+                    index++;
+                }
+                localStorage.setItem(`${id}.${index}`, `${input.value}`);
+                input.value = null;
+                Btn(id);
+                creatData();
+            }
+            index = 1;
+        }
+        function DeleteItinerary(id, key) {
+            localStorage.removeItem(key);
+            Btn(id);
+        }
+        function addmonth() {
+            index2++;
+            creatData();
+        }
+        function lessmonth() {
+            index2--;
+            creatData();
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
