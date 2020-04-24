@@ -47,9 +47,10 @@
         }
 
         td p {
-            font-size: 10px;
+            font-size: 6px;
             padding: 0;
             margin: 0;
+            text-align: left;
         }
     </style>
 </head>
@@ -196,7 +197,6 @@
                     if (localStorage.getItem(`${today.getFullYear()}${month}${i}9${index}`) != null) {
                         let p = document.createElement("p");
                         p.textContent = `${index}:` + localStorage.getItem(`${today.getFullYear()}${month}${i}9${index}`)
-                        p.className = "w-25";
                         setDay.appendChild(p);
                     }
                     index++;
