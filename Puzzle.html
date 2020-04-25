@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        .a1 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: 0px 0px;
+        }
+        .a2 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -125px 0px;
+        }
+        .a3 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -250px 0px;
+        }
+        .a4 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -375px 0px;
+        }
+        .a5 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: 0px -125px;
+        }
+        .a6 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -125px -125px;
+        }
+        .a7 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -250px -125px;
+        }
+        .a8 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -375px -125px;
+        }
+        .a9 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: 0px -250px;
+        }
+        .a10 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -125px -250px;
+        }
+        .a11 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -250px -250px;
+        }
+        .a12 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -375px -250px;
+        }
+        .a13 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: 0px -375px;
+        }
+        .a14 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -125px -375px;
+        }
+        .a15 {
+            background-image: url(https://picsum.photos/id/237/500/500);
+            background-position: -250px -375px;
+        }
+        #container div:hover {
+            transform: scale(1.03);
+            transition: .2s;
+            z-index: 2;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            border: #000 solid 1px;
+        }
+        #container {
+            transition: 1s;
+            border: #000 1px solid;
+            display: flex;
+            flex-wrap: wrap;
+            width: 500px;
+            min-width: 500px;
+            height: 500px;
+            min-height: 500px;
+        }
+        #container div {
+            width: 123px;
+            height: 123px;
+            border: 1px solid #000;
+            color: rgba(0, 0, 0, 0)
+        }
+        button {
+            width: 100px;
+            height: 100px;
+        }
+        #btnBar {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="btnBar">
+        <button onclick="stir()">開始</button>
+        <button onclick="automatic()">自動復原</button>
+        <button onclick="reset()">直接復原</button>
+    </div>
+    <img src="https://picsum.photos/id/237/500/500" alt="">
+    <div id="container">
+    </div>
+    <script>
+        const listAns = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
+        var list = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
+        var p = "";
+        var goback = ["33"];
+        listAns.forEach(item => {
+            item.forEach(index => {
+                p += index;
+            })
+        })
+        var container = document.getElementById("container");
+        const Ans = listAns[list.length - 1][list[0].length - 1];
+        creatPuzzle(list);
+        function creatPuzzle(list) {
+            container.innerHTML = null;
+            for (let x = 0; x <= list[x].length; x++) {
+                for (let y = 0; y <= list[x, y].length; y++) {
+                    let div = document.createElement("div");
+                    // div.id = list[i][x];
+                    div.setAttribute("id", `${x}${y}`)
+                    div.setAttribute("onclick", `moving(this.id)`)
+                    div.textContent = list[x][y];
+                    div.className = "a" + list[x][y];
+                    container.appendChild(div)
+                    if (y + 1 > list[x, y].length - 1) {
+                        break;
+                    }
+                }
+                if (x + 1 > list[x].length - 1) {
+                    break;
+                }
+            }
+        }
+        function moving(id) {
+            if (id == null) {
+                return;
+            }
+            let x = id.substr(0, 1);
+            x = parseInt(x);
+            let y = id.substr(1, 1);
+            y = parseInt(y);
+            let number = list[x][y];
+            if (x - 1 >= 0) {
+                if (list[x - 1][y] == Ans) {
+                    list[x - 1][y] = number;
+                    list[x][y] = Ans;
+                    goback.push(`${x}` + `${y}`);
+                }
+            }
+            if (x + 1 <= list.length - 1) {
+                if (list[x + 1][y] == Ans) {
+                    list[x + 1][y] = number;
+                    list[x][y] = Ans;
+                    goback.push(`${id}`);
+                }
+            }
+            if (y - 1 >= 0) {
+                if (list[x][y - 1] == Ans) {
+                    list[x][y - 1] = number;
+                    list[x][y] = Ans;
+                    goback.push(`${id}`);
+                }
+            }
+            if (y + 1 <= list[x].length - 1) {
+                if (list[x][y + 1] == Ans) {
+                    list[x][y + 1] = number;
+                    list[x][y] = Ans;
+                    goback.push(`${id}`);
+                }
+            }
+            creatPuzzle(list);
+        }
+        function reset() {
+            goback = ["33"];
+            list = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
+            creatPuzzle(list);
+        }
+        function stir() {
+            reset();
+            while (true) {
+                let x = Math.floor(Math.random() * 4).toString();
+                let y = Math.floor(Math.random() * 4).toString();
+                let id = x + y;
+                moving(id);
+                if (goback.length > 75 && list[3][3] == Ans) {
+                    if (goback.length > 90) {
+                        stir();
+                    }
+                    return;
+                }
+            }
+        }
+        function automatic() {
+            let id = goback[goback.length - 1];
+            moving(id);
+            goback.pop();
+            let k = "";
+            list.forEach(item => {
+                item.forEach(index => {
+                    k += index;
+                })
+            })
+            if (p == k) {
+                goback = ["33"];
+                return;
+            }
+            setTimeout("automatic()", 35);
+        }
+    </script>
+</body>
+
+</html>
