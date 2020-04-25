@@ -4,86 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>小黑狗我的愛</title>
     <style>
         * {
             padding: 0;
             margin: 0;
             list-style: none;
         }
+
         .a1 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: 0px 0px;
         }
+
         .a2 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -125px 0px;
         }
+
         .a3 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -250px 0px;
         }
+
         .a4 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -375px 0px;
         }
+
         .a5 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: 0px -125px;
         }
+
         .a6 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -125px -125px;
         }
+
         .a7 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -250px -125px;
         }
+
         .a8 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -375px -125px;
         }
+
         .a9 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: 0px -250px;
         }
+
         .a10 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -125px -250px;
         }
+
         .a11 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -250px -250px;
         }
+
         .a12 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -375px -250px;
         }
+
         .a13 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: 0px -375px;
         }
+
         .a14 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -125px -375px;
         }
+
         .a15 {
             background-image: url(https://picsum.photos/id/237/500/500);
             background-position: -250px -375px;
         }
+
         #container div:hover {
             transform: scale(1.03);
-            transition: .2s;
+            transition: .15s;
             z-index: 2;
         }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         img {
             border: #000 solid 1px;
         }
+
         #container {
             transition: 1s;
             border: #000 1px solid;
@@ -94,16 +113,19 @@
             height: 500px;
             min-height: 500px;
         }
+
         #container div {
             width: 123px;
             height: 123px;
             border: 1px solid #000;
             color: rgba(0, 0, 0, 0)
         }
+
         button {
             width: 100px;
             height: 100px;
         }
+
         #btnBar {
             display: flex;
             flex-direction: column;
@@ -121,6 +143,7 @@
     <div id="container">
     </div>
     <script>
+        var judge = false;
         const listAns = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
         var list = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
         var p = "";
@@ -191,8 +214,23 @@
                 }
             }
             creatPuzzle(list);
+            let k = "";
+            list.forEach(item => {
+                item.forEach(index => {
+                    k += index;
+                })
+            })
+            if (p == k) {
+                goback = ["33"];
+                if (judge == true) {
+                    judge = false;
+                    alert("如果是手動過關請收下我的膝蓋");
+                }
+                return;
+            }
         }
         function reset() {
+            judge = false;
             goback = ["33"];
             list = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
             creatPuzzle(list);
@@ -208,9 +246,11 @@
                     if (goback.length > 90) {
                         stir();
                     }
+                    judge = true;
                     return;
                 }
             }
+            return;
         }
         function automatic() {
             let id = goback[goback.length - 1];
@@ -224,9 +264,12 @@
             })
             if (p == k) {
                 goback = ["33"];
+                if (judge == true) {
+                    judge = false;
+                }
                 return;
             }
-            setTimeout("automatic()", 35);
+            setTimeout("automatic()", 30);
         }
     </script>
 </body>
