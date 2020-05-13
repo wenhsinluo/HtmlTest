@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Create Account – Furniture.ca</title>
+
+    <style>
+        .Register {
+            padding-top: 50px;
+        }
+
+        .RegisterA {
+            font-size: 14px;
+            display: inline;
+            color: #D4A23D;
+            margin-left: 10px;
+        }
+
+        .RegisterA:hover {
+            transition: .3s;
+            color: #8a756b;
+            text-decoration: none;
+        }
+
+        .PrivacyPolicy {
+            color: #D4A23D;
+        }
+
+        .PrivacyPolicy:hover {
+            transition: .3s;
+            color: #8a756b;
+            text-decoration: none;
+        }
+
+        .RegisterH3 {
+            display: inline;
+        }
+
+        .Register input {
+            border: 2px solid #E6E6E6;
+            width: 70%;
+            height: 40px;
+            padding-left: 5px;
+        }
+
+        #checkbox {
+            width: 20px;
+        }
+
+        .Register p {
+            margin-top: 10px;
+            margin-bottom: 3px;
+        }
+
+        .Register b::after {
+            content: "*";
+            color: #ff0000;
+        }
+
+        #createBtn {
+            margin-top: 10px;
+            width: 130px;
+            height: 43px;
+            background-color: #323232;
+            border: 0;
+            color: #F5F5E9;
+        }
+
+        #createBtn:hover {
+            border: 2px solid #F5F5E9;
+            border-bottom: 2px solid rgb(117, 117, 117);
+            border-right: 2px solid rgb(116, 115, 115);
+        }
+
+        .check {
+            display: flex;
+            align-items: center;
+        }
+
+        input:focus {
+            transition: .1s;
+            border: 3px rgb(115, 204, 255) solid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 Register">
+                <img class="w-100" src="/registration_page_image_-_june_2019.png" alt="">
+                <em>*Offer valid for first time subscribers only on one regular price FCA collection item. Not valid on
+                    Hot Buy or Sale items. Discount cannot be combined with any other offer.</em>
+            </div>
+            <form class="col-12 col-lg-6 Register" id="form">
+                <h3 class="RegisterH3">Register Below</h3><a class="RegisterA" href="#">Already Registered? Sign In!</a>
+                <p><b>Email Address </b></p>
+                <input type="email" placeholder=" Enter your username" id="email" required
+                    oninvalid="setCustomValidity('Please input a valid email address')" oninput="setCustomValidity('')">
+                <p><b>First Name </b></p>
+                <input type="text" placeholder=" Please enter your first name" id="firstName" required
+                    oninvalid="setCustomValidity('Please enter this field')" oninput="setCustomValidity('')" 
+                    pattern="[a-zA-Z\u4e00-\u9fa5]{1,30}">
+                <p><b>Last Name </b></p>
+                <input type="text" placeholder=" Please enter your last name" id="lastName" required
+                    oninvalid="setCustomValidity('Please enter this field')" oninput="setCustomValidity('')" 
+                    pattern="[a-zA-Z\u4e00-\u9fa5]{1,30}">
+                <p><b>Password </b></p>
+                <input type="password" placeholder=" Password" id="password" required pattern="[0-9a-zA-Z]{6,}"
+                    oninvalid="setCustomValidity('Invalid password Passwords must be at least 6 characters')"
+                    oninput="setCustomValidity('')">
+                <p><b>Confirm Password </b></p>
+                <input type="password" placeholder=" Confirm Password" id="ConfirmPassword" required
+                    novalidate="ConfirmPassword()" oninput="setCustomValidity('')">
+                <p><b>Postal Code </b></p>
+                <input type="text" placeholder=" Postal Code" required>
+                <p class="check"><input type="checkbox" name="#" id="checkbox">
+                    <strong>Sign up for emails from Furniture.ca</strong>
+                </p>
+                <p>You may safely unsubscribe at any time. Furniture.ca will not sell, rent, share, trade, or give away
+                    any information you provide us. To learn more about our security guarantees, refer to our <a
+                        class="PrivacyPolicy" href="">Privacy Policy</a>.</p>
+                <input type="submit" id="createBtn" value="Create Account">
+            </form>
+        </div>
+    </div>
+    <script>
+        var pw = document.getElementById("password");
+        var cpw = document.getElementById("ConfirmPassword");
+        pw.onchange = ConfirmPassword;
+        cpw.onkeyup = ConfirmPassword;
+        function ConfirmPassword() {
+            if (pw.value != cpw.value) {
+                cpw.setCustomValidity("Passwords Don't Match");
+            }
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
