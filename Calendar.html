@@ -13,29 +13,35 @@
     <title>Calendar</title>
 
     <style>
+        .container{
+            margin-top: 4%;
+        }
         .align-top:hover {
             cursor: pointer;
             background-color:rgb(59, 59, 247);
-            transform: scale(1.2);
+            transform: scale(1.1);
             transition: .2s;
             z-index: 2;
         }
 
         .topbtn:hover {
-            background-color: rgb(255, 79, 79);
+            background-color: rgb(44, 1, 146);
             cursor: pointer;
             transition: .3s;
             z-index: 2;
         }
 
         body {
+            background-image: url('http://seopic.699pic.com/photo/40100/6015.jpg_wh1200.jpg');
+            background-size: cover;
             background-color: #000;
         }
 
         th,
         td {
-            border: 1px solid #000;
-            height: 100px;
+            width: 170px;
+            border: 3px solid #000;
+            height: 70px;
             background-color: rgb(130, 171, 252);
         }
 
@@ -67,13 +73,13 @@
                         <th class="topbtn" onclick="addmonth();">▶</th>
                     </tr>
                     <tr>
-                        <th>星期日</th>
-                        <th>星期一</th>
-                        <th>星期二</th>
-                        <th>星期三</th>
-                        <th>星期四</th>
-                        <th>星期五</th>
-                        <th>星期六</th>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,20 +149,20 @@
         <div class="modal-dialog modal-dialog-centered border-dark" role="document">
             <div class="modal-content border-dark">
                 <div class="modal-header border-dark bg-secondary">
-                    <h5 class="modal-title border-dark" id="exampleModalCenterTitle">行程記錄</h5>
+                    <h5 class="modal-title border-dark" id="exampleModalCenterTitle">stroke</h5>
                     <button type="button" class="close border-dark" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div id="content" class="bg-secondary border-dark"></div>
                 <div class="modal-footer bg-secondary border-dark">
-                    <div class=" bg-secondary modal-body border-dark">請輸入行程:
+                    <div class=" bg-secondary modal-body border-dark">Enter itinerary:
                         <input type="text" name="" id="input">
                         <!-- <textarea name="" id="input" cols="30" rows="5"></textarea> -->
                     </div>
-                    <button id="SaveBtn" type="button" class="btn btn-primary border-dark">確定儲存</button>
+                    <button id="SaveBtn" type="button" class="btn btn-primary border-dark">Record</button>
                     <button type="button" class=" border-dark btn btn-secondary bg-danger"
-                        data-dismiss="modal">離開</button>
+                        data-dismiss="modal">close</button>
                 </div>
             </div>
         </div>
@@ -174,7 +180,7 @@
             weekday.setDate(1);
             let week = weekday.getDay();
             let th = document.getElementById("month");
-            th.textContent = `${today.getFullYear()}年${month}月份`;
+            th.textContent = `${today.getFullYear()} Year ${month} month `;
             for (let i = 0; i < 42; i++) {
                 let setDay = document.querySelectorAll("td")[i];
                 setDay.innerHTML = null;
@@ -214,7 +220,7 @@
                     let deleteBtn = document.createElement("button");
                     let div = document.createElement("div");
                     deleteBtn.className = "btn btn-secondary align-right bg-danger ";
-                    deleteBtn.innerText = "清除";
+                    deleteBtn.innerText = "Delete";
                     deleteBtn.setAttribute("onclick", `DeleteItinerary(${id},${id}9${index})`);
                     p.textContent = `${index}:` + localStorage.getItem(`${id}9${index}`);
                     div.appendChild(p);
